@@ -4,12 +4,14 @@ import java.io.File;
 import java.net.MalformedURLException;
 
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
+import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
 
 /*
@@ -25,6 +27,7 @@ public class Main extends Application {
 	MenuBar menu;
 	Menu fileMenu;
 	MenuItem openItem;
+	MenuItem exitItem;
 	
 	@Override
 	public void start(Stage primaryStage) {
@@ -36,8 +39,10 @@ public class Main extends Application {
 			menu = new MenuBar();	
 			fileMenu = new Menu("file");
 			openItem = new MenuItem("open");
+			exitItem = new MenuItem("exit");
 			
 			fileMenu.getItems().add(openItem);
+			fileMenu.getItems().add(exitItem);
 			menu.getMenus().add(fileMenu);
 			
 			openItem.setOnAction((e) -> {
@@ -47,13 +52,20 @@ public class Main extends Application {
 					if(mediaPlayer != null) {
 						mediaPlayer.player.dispose();
 					}
-					mediaPlayer = new Player(mediaFile.toURI().toURL().toExternalForm());
-					mediaPlayer.view.setFitWidth(scene.getWidth());
-					root.setCenter(mediaPlayer);
+					if(mediaFile != null) {
+						mediaPlayer = new Player(mediaFile.toURI().toURL().toExternalForm());
+						mediaPlayer.view.setFitWidth(scene.getWidth());
+						root.setCenter(mediaPlayer);
+					}
+
 				} catch (MalformedURLException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
+			});
+			
+			exitItem.setOnAction((e) -> {
+				Platform.exit();
 			});
 			
 			root.setTop(menu);
@@ -64,6 +76,7 @@ public class Main extends Application {
 			});
 			
 			primaryStage.setTitle("Media Player");
+			primaryStage.getIcons().add(new Image(getClass().getResourceAsStream("media-player-icon.png")));
 			primaryStage.setScene(scene);
 			primaryStage.show();
 		} catch(Exception e) {

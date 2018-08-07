@@ -16,6 +16,8 @@ public class MediaBar extends HBox {
 	
 	Button pause;
 	
+	Button mute;
+	
 	Label volumeLBL;
 	
 	MediaPlayer player;
@@ -32,6 +34,7 @@ public class MediaBar extends HBox {
 		setPadding(new Insets(10,10,10,10));
 		
 		pause = new Button();
+		mute = new Button();
 		volumeLBL = new Label("Volume :");
 		
 		getChildren().add(pause);
@@ -39,6 +42,7 @@ public class MediaBar extends HBox {
 		
 		getChildren().add(volumeLBL);
 		getChildren().add(vol);
+		getChildren().add(mute);
 		
 		vol.prefWidth(70);
 		vol.setMinWidth(30);
