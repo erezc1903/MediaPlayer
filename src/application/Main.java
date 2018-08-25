@@ -12,6 +12,11 @@ import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
 import javafx.scene.image.Image;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundImage;
+import javafx.scene.layout.BackgroundPosition;
+import javafx.scene.layout.BackgroundRepeat;
+import javafx.scene.layout.BackgroundSize;
 import javafx.scene.layout.BorderPane;
 
 /*
@@ -22,19 +27,20 @@ public class Main extends Application {
 	
 	FileChooser mediaChooser;
 	
-	Player mediaPlayer;
+	Player mediaPlayer; // The object that handles and displays the video.
 	
-	MenuBar menu;
-	Menu fileMenu;
-	MenuItem openItem;
-	MenuItem exitItem;
+	MenuBar menu; // A MenuBar control placed at the top of the user interface, and embedded within it are Menus.
+	Menu fileMenu; // A menu named "file" for various actions.
+	MenuItem openItem; // A menu item to open a file.
+	MenuItem exitItem; // A menu item to exit the interface.
+
 	
 	@Override
 	public void start(Stage primaryStage) {
 		try {
 			BorderPane root = new BorderPane();
 			Scene scene = new Scene(root,400,400);
-			
+
 			mediaChooser = new FileChooser();
 			menu = new MenuBar();	
 			fileMenu = new Menu("file");
@@ -62,7 +68,7 @@ public class Main extends Application {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
-			});
+			});	
 			
 			exitItem.setOnAction((e) -> {
 				Platform.exit();
